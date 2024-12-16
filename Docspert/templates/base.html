@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title>Docspert Accounts</title>
+    {% endblock title %}
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+</head>
+<body>
+<nav class="navbar bg-dark border-bottom border-body">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <img src="{% static 'logo.png' %}" alt="Bootstrap" width="200" height="80">
+        </a>
+    </div>
+</nav>
+<main class="container mt-5">
+    {% block main %}
+    {% endblock main%}
+    </div>
+</main>
+
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

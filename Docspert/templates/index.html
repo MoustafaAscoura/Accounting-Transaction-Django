@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block main %}
+<div><!-- Title -->
+    <div class="text-center">
+        <h1>Accounts Dashboard</h1>
+    </div>
+
+    <!-- Search bar and Import button -->
+    <form class="d-flex justify-content-between my-5 flex-wrap gap-3">
+        <input name="query" required type="text" class="form-control me-2 px-4 py-2 flex-grow-1"
+               placeholder="Search accounts by ID or Name ..." aria-label="Search">
+        <div class="flex-shrink-0 d-flex gap-3 ms-auto">
+            <button class="btn btn-dark px-5 w-fit" type="submit">Search</button>
+            <button class="btn btn-outline-dark px-5 w-fit d-flex justify-content-center align-items-center gap-2"
+                    data-bs-toggle="modal" data-bs-target="#importFileModal">Import From File
+                {% include "partials/icons/import.svg" %}
+            </button>
+        </div>
+    </form>
+    {% include "partials/import_file_modal.html" %}
+    {% if file_upload_success == True %}
+        {% include "partials/file_alert.html" with success=True message="File Uploaded Successfully" %}
+    {% elif file_upload_success == False %}
+        {% include "partials/file_alert.html" with success=False message="Something went wrong" %}
+    {% endif %}
+
+    <!-- Accounts table -->
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead class="table-dark">
+            <tr>
+                <th style="border-start-start-radius: 8px">ID</th>
+                <th>Name</th>
+                <th style="border-start-end-radius: 8px">Balance</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr role="button">
+                    <td>1</td>
+                    <td>John Doe</td>
+                    <td>$1,000.00</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    {% endblock main %}

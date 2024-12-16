@@ -1,0 +1,4 @@
+<div class="alert {% if success %}alert-success{% else %}alert-danger{% endif %} alert-dismissible fade show fixed-bottom ms-3 w-fit" role="alert">
+  <strong class="me-1">{% if success %}&#10003;{% else %}&#9888;{% endif %}</strong> {{message}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>

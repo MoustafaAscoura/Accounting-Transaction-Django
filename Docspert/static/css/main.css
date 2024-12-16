@@ -1,0 +1,8 @@
+.w-fit {
+    min-width: fit-content;
+    width: fit-content;
+}
+
+button:hover svg {
+    fill: white;
+}
