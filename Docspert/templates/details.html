@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block main %}
+    <div>
+        <div class="container mt-5">
+            <!-- Page Title -->
+            <div class="text-center mb-4">
+                <h1>Account Details</h1>
+            </div>
+
+            <!-- Account Information -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Account Information</h5>
+                    <p><strong>Account ID:</strong> <span id="account-id">{{ account.id }}</span></p>
+                    <p><strong>Name:</strong> <span id="account-name">{{ account.name }}</span></p>
+                    <p><strong>Balance:</strong> <span id="account-balance">${{ account.balance }}</span></p>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="mb-4 d-flex justify-content-start gap-2">
+                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#transfer_to">Transfer to this
+                    Account
+                </button>
+                <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#transfer_from">Transfer from this
+                    Account
+                </button>
+                {% include 'partials/transaction_form.html' with transaction_form=transaction_form id="transfer_to" %}
+                {% include 'partials/transaction_form.html' with transaction_form=transaction_form id="transfer_from" %}
+
+            </div>
+
+            <!-- Incoming Transactions Table -->
+            <h4 class="mb-3">Incoming Transactions</h4>
+            <div class="table-responsive mb-4">
+                <table class="table table-bordered table-hover">
+                    <thead class="table-light">
+                    <tr>
+                        <th>Transaction ID</th>
+                        <th>From Account</th>
+                        <th>Amount</th>
+                        <th>Date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for incoming in account.incoming_transactions.all %}
+                        <tr>
+                            <td>{{ incoming.id }}/td>
+                            <td>{{ incoming.account_id_from.name }}</td>
+                            <td>${{ incoming.amount }}</td>
+                            <td>{{ incoming.created_at }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Outgoing Transactions Table -->
+            <h4 class="mb-3">Outgoing Transactions</h4>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead class="table-light">
+                    <tr>
+                        <th>Transaction ID</th>
+                        <th>To Account</th>
+                        <th>Amount</th>
+                        <th>Date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for outgoing in account.outgoing_transactions.all %}
+                        <tr>
+                            <td>{{ outgoing.id }} </td>
+                            <td>{{ outgoing.account_id_to.name }}</td>
+                            <td>${{ outgoing.amount }}</td>
+                            <td>{{ outgoing.created_at }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock main %}

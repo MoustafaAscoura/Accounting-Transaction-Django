@@ -1,0 +1,52 @@
+<!-- Modal -->
+<div class="modal fade" id="{{ id }}" tabindex="-1" aria-labelledby="transactionModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form class="modal-content" action="" method="post">
+            {% csrf_token %}
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="transactionModalLabel">
+                    {% if id == "transfer_from" %}
+                        Transfer From this account
+                    {% else %}
+                        Transfer to this account
+                    {% endif %}
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    {% if id == "transfer_from" %}
+                        <label for="account_id_to" class="form-label w-25">To:</label>
+                        {{ transaction_form.account_id_to }}
+                    {% else %}
+                        <select name="account_id_to" hidden id="id_account_id_to">
+                            <option value="{{ account.id }}">{{ account.name }}</option>
+                        </select>
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                    {% if id == "transfer_to" %}
+                        <label for="account_id_from" class="form-label w-25">From:</label>
+                        {{ transaction_form.account_id_from }}
+                    {% else %}
+                        <select name="account_id_from" hidden id="id_account_id_from">
+                            <option value="{{ account.id }}">{{ account.name }}</option>
+                        </select>
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                    <label for="amount" class="form-label w-25">Amount:</label>
+                    {{ transaction_form.amount }}
+                </div>
+                <div class="mb-3">
+                    <label for="note" class="form-label w-25">Note:</label>
+                    {{ transaction_form.note }}
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-primary">Confirm</button>
+            </div>
+        </form>
+    </div>
+</div>
